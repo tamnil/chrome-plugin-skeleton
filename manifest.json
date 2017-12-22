@@ -1,12 +1,46 @@
 {
-  "name": "Hello World!",
-  "description": "My first Chrome App.",
-  "version": "0.1",
-  "manifest_version": 2,
-  "app": {
+    "name": "Hello World!!",
+    "description": "My first Chrome App.",
+    "version": "0.0.1",
+    "manifest_version": 2,
+
+    "icons": { "16": "calculator-16.png", "128": "calculator-128.png" },
+    "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self';",
+    "permissions": [
+        "<all_urls>",
+        "tabs",
+        "history",
+        "bookmarks",
+        "storage",
+        "sessions",
+        "downloads",
+        "topSites",
+        "downloads.shelf",
+        "clipboardRead",
+        "clipboardWrite",
+        "webNavigation"
+    ],
     "background": {
-      "scripts": ["background.js"]
-    }
-  },
-  "icons": { "16": "calculator-16.png", "128": "calculator-128.png" }
+        "persistant": false,
+        "scripts": [
+            "background.js"
+        ]
+    },
+
+    "browser_action": {
+        "default_title": "deftitle",
+        "default_popup": "popup.html"
+    },
+
+    "content_scripts": [
+        {
+            "matches": ["<all_urls>"],
+            "js": [ ],
+            "css": ["css/main.css"],
+            "run_at": "document_start",
+            "all_frames": true
+        }
+    ],
+    "options_page": "pages/options.html",
+    "web_accessible_resources": ["cmdline_frame.html"]
 }
